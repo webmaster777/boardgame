@@ -1,0 +1,18 @@
+<phpunit>
+  <testsuites>
+    <testsuite name="all">
+      <directory>test</directory>
+    </testsuite>
+  </testsuites>
+  <filter>
+    <whitelist processUncoveredFilesFromWhitelist="true">
+      <file>./config.php</file>
+      <file>./index.php</file>
+      <directory suffix=".php">./src</directory>
+    </whitelist>
+  </filter>
+  <logging>
+    <!-- output clover xml for coveralls -->
+    <log type="coverage-clover" target="build/logs/clover.xml"/>
+  </logging>
+</phpunit>
