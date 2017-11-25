@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 use Webmaster777\BoardGameCollection\Entity\BoardGame;
 
-class BoardGameTest extends TestCase
+class BoardGameTest extends TestCaseWithContainer
 {
 
   /**
@@ -18,7 +18,6 @@ class BoardGameTest extends TestCase
   public function setUp()
   {
     parent::setUp();
-    $this->container = require __DIR__.'/../index.php';
 
     $em = $this->container->get(EntityManager::class);
     $em->createQuery('DELETE FROM e:BoardGame')->execute();
