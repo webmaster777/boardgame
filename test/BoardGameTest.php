@@ -13,11 +13,6 @@ use Webmaster777\BoardGameCollection\Entity\BoardGame;
 class BoardGameTest extends TestCaseWithContainer
 {
 
-  /**
-   * @var ContainerInterface
-   */
-  protected $container;
-
   public function setUp()
   {
     parent::setUp();
