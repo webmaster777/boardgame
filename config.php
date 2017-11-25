@@ -47,6 +47,7 @@ return [
     });
 
     $app->get('/games', \Webmaster777\BoardGameCollection\Controller\GetGamesController::class);
+    $app->post('/games/new', \Webmaster777\BoardGameCollection\Controller\PostNewGameController::class);
 
     return $app;
   }
