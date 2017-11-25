@@ -46,6 +46,14 @@ return [
       return $response->withStatus(501);
     });
 
+    $app->get('/games', function(\Slim\Http\Response $response, \Doctrine\ORM\EntityManager $em) {
+
+      $repository = $em->getRepository(\Webmaster777\BoardGameCollection\Entity\BoardGame::class);
+      $result = $repository->findAll();
+
+      return $response->withStatus(200)->withJson($result);
+    });
+
     return $app;
   }
 
