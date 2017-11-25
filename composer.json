@@ -27,12 +27,12 @@
   },
   "autoload": {
     "psr-4": {
-      "\\Webmaster777\\BoardGameCollection\\": "src/"
+      "Webmaster777\\BoardGameCollection\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "\\Webmaster777\\BoardGameCollection\\Test\\": "test/"
+      "Webmaster777\\BoardGameCollection\\Test\\": "test/"
     }
   }
 }
