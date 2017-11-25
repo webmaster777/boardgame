@@ -26,7 +26,7 @@ return [
   'doctrine.orm.config' => function() {
     $config = \Doctrine\ORM\Tools\Setup::createAnnotationMetadataConfiguration(
       array(__DIR__."/src"), true, null, null, false);
-    $config->setEntityNamespaces(['r'=>'\Webmaster777\BoardGameCollection\Entity']);
+    $config->setEntityNamespaces(['e'=>'\Webmaster777\BoardGameCollection\Entity']);
     return $config;
   },
 

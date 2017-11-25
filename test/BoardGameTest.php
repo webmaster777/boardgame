@@ -21,7 +21,7 @@ class BoardGameTest extends TestCase
     $this->container = require __DIR__.'/../index.php';
 
     $em = $this->container->get(EntityManager::class);
-    $em->createQuery('DELETE FROM r:BoardGame')->execute();
+    $em->createQuery('DELETE FROM e:BoardGame')->execute();
   }
 
   public function provideBoardGames() {
