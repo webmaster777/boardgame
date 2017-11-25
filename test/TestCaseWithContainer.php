@@ -3,13 +3,14 @@
 
 namespace Webmaster777\BoardGameCollection\Test;
 
+use DI\Container;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
 
 abstract class TestCaseWithContainer extends TestCase
 {
   /**
-   * @var ContainerInterface
+   * @var ContainerInterface|Container
    */
   protected $container;
 
