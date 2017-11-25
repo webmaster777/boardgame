@@ -25,6 +25,7 @@ class BoardGameTest extends TestCaseWithContainer
     return [
       ["Monopoly"],
       ["Risk"],
+      ["Shetle'rs of Catan%20"],
     ];
   }
 
