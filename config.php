@@ -38,5 +38,16 @@ return [
     return \Doctrine\ORM\Tools\Console\ConsoleRunner::createHelperSet($entityManager);
   },
 
+  // Slim app
+  \Slim\App::class => function(\Psr\Container\ContainerInterface $container) {
+    $app = new \Slim\App($container);
+
+    $app->get('/',function(\Psr\Http\Message\ResponseInterface $response) {
+      return $response->withStatus(501);
+    });
+
+    return $app;
+  }
+
 
 ];
