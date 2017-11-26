@@ -3,14 +3,12 @@
 namespace Webmaster777\BoardGameCollection\Test;
 
 use Doctrine\ORM\EntityManager;
-use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
 use Slim\App;
 use Slim\Http\Environment;
 use Slim\Http\Request;
 use Webmaster777\BoardGameCollection\Entity\BoardGame;
 
-class BoardGameTest extends TestCaseWithContainer
+class BoardGameTest extends SlimTestCase
 {
 
   public function setUp()
@@ -74,31 +72,15 @@ class BoardGameTest extends TestCaseWithContainer
    * @dataProvider provideBoardGames
    */
   public function testPostNewGame($name) {
-    // create mock request
-    $env = Environment::mock([
-      "REQUEST_METHOD" => "POST",
-      "REQUEST_URI" => "/games/new",
-    ]);
-    $req = Request::createFromEnvironment($env)
-      ->withParsedBody(["name"=>$name]);
-    $this->container->set('request', $req);
 
-    // get and run app
-    $app = $this->container->get(App::class);
-    $response = $app->run(true);
+    $response = $this->performPostRequest('/games/new',["name"=>$name]);
 
     // assert Created http code
     $this->assertEquals(201, $response->getStatusCode(),
       "response code should be 201 - Created");
 
-    // verify we're receiving json
-    $this->assertTrue($response->hasHeader("Content-type"));
-    $header = $response->getHeader("Content-type");
-    $header = array_shift($header);
-    $header = explode(";",$header);
-    $header = array_shift($header);
-    $this->assertEquals("application/json",$header,
-      "response is not json");
+    // assert we're receiving json
+    $this->assertResponseContentType("application/json",$response);
 
     // verify actual content
     $decoded = json_decode(strval($response->getBody()));
@@ -109,31 +91,14 @@ class BoardGameTest extends TestCaseWithContainer
 
   public function testGetGames()
   {
-    // create mock request
-    $env = Environment::mock([
-      "REQUEST_METHOD" => "GET",
-      "REQUEST_URI" => "/games",
-      "HTTP_ACCEPT" => "application/json;q=0.9,*/*;q=0.8"
-    ]);
-    $req = Request::createFromEnvironment($env);
-    $this->container->set('request', $req);
-
-    // get and run app
-    $app = $this->container->get(App::class);
-    $response = $app->run(true);
+    $response = $this->performGetRequest('/games');
 
     // assert not implemented http code
     $this->assertEquals(200, $response->getStatusCode(),
       "response code should be OK");
 
-    // verify we're receiving json
-    $this->assertTrue($response->hasHeader("Content-type"));
-    $header = $response->getHeader("Content-type");
-    $header = array_shift($header);
-    $header = explode(";",$header);
-    $header = array_shift($header);
-    $this->assertEquals("application/json",$header,
-      "response is not json");
+    // assert we're receiving json
+    $this->assertResponseContentType("application/json",$response);
 
     $decoded = json_decode(strval($response->getBody()));
     $this->assertTrue(is_array($decoded), "response is not an array");
